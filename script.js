@@ -1,8 +1,6 @@
-/*
-    Created by Andreson Tianth @tianth
-    for Adobe Indesign CC 2015+
-*/    
-main();  
+// #target 'InDesign-11.0' 
+ 
+    main();  
     function main(){  
         var p =     "";  
         var doc =   app.activeDocument;
@@ -21,15 +19,19 @@ main();
                 p = i + "-" + pages_group ;
             };
             if( !( p == "" ) && (  ( ((pages_group * i) - 2) + pages_group ) <= pages.length) ){
-                var file = new File("~/Desktop/export/range-" + p + ".pdf"); 
+                var page_name = pages.item( i ).name; 
+                var file = new File("~/Desktop/export/" + p + ".pdf"); 
                 
                 app.pdfExportPreferences.pageRange = p ;
                 if( is_print_output == true ){
-                    app.pdfExportPreferences.cropMarks = true; 
-                    // app.pdfExportPreferences.standardsCompliance = PDFXStandards.PDFX42007_STANDARD;
-                    app.pdfExportPreferences.registrationMarks = true;
-                    //app.pdfExportPreferences.pdfMarkType = MarkTypes.J_MARK_WITH_CIRCLE;
-                    app.pdfExportPreferences.optimizePDF = false;
+                    with( app.pdfExportPreferences ) {
+                        trimMarks = true; 
+                        //cropMarks = true;
+                        //standardsCompliance = PDFXStandards.PDFX42007_STANDARD;
+                        registrationMarks = true;
+                        //pdfMarkType = MarkTypes.J_MARK_WITH_CIRCLE;
+                        optimizePDF = false;
+                    };
                 }; 
                 doc.exportFile( ExportFormat.PDF_TYPE, file, false );
             };  
@@ -38,4 +40,3 @@ main();
     alert("Exportadas "+ pages.length + " páginas com sucesso");
     };
 #targetengine 'myPersistentScope'
- 
