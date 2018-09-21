@@ -1,5 +1,4 @@
-// #target 'InDesign-11.0' 
- 
+
     main();  
     function main(){  
         var p =     "";  
@@ -26,7 +25,7 @@
                 if( is_print_output == true ){
                     with( app.pdfExportPreferences ) {
                         trimMarks = true; 
-                        //cropMarks = true;
+                        cropMarks = true;
                         //standardsCompliance = PDFXStandards.PDFX42007_STANDARD;
                         registrationMarks = true;
                         //pdfMarkType = MarkTypes.J_MARK_WITH_CIRCLE;
@@ -40,3 +39,4 @@
     alert("Exportadas "+ pages.length + " páginas com sucesso");
     };
 #targetengine 'myPersistentScope'
+ 
