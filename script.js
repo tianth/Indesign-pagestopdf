@@ -1,4 +1,8 @@
-    main();  
+/*
+    Created by Andreson Tianth @tianth
+    for Adobe Indesign CC 2015+
+*/    
+main();  
     function main(){  
         var p =     "";  
         var doc =   app.activeDocument;
