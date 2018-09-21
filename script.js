@@ -7,7 +7,7 @@
         var pages_group = 2; //parseInt( prompt("Quantidade de páginas agrupadas por pdf?", 2, "Grupo de páginas") ) ; 
         var num_pages_groups_rest = pages.length % pages_group; 
         var num_pages_groups = num_pages_groups_rest > 0 ? parseInt( ( pages.length/pages_group ) + num_pages_groups_rest ) :  parseInt( pages.length/pages_group ) ; 
-        var is_print_output = confirm("Preparar para impressão Champs? ") ? true : false; 
+        var is_print_output = true; 
         var l_page = 1;
         var prefs = app.pdfExportPreferences ; 
         for(i = 1; i <= pages.length ; i ++ ){               
@@ -21,15 +21,19 @@
                 var page_name = pages.item( i ).name; 
                 var file = new File("~/Desktop/export/" + p + ".pdf"); 
                 
-                app.pdfExportPreferences.pageRange = p ;
+                prefs.pageRange = p ;
+                
                 if( is_print_output == true ){
                     with( app.pdfExportPreferences ) {
-                        trimMarks = true; 
                         cropMarks = true;
+                        //bleedMarks = (prompt("Marcas de sangria", bleedMarks) === 'true') ;
+                        //bleedInside = prompt("Sangria interna (número)", bleedInside );*
+                        useDocumentBleedWithPDF = true;
                         //standardsCompliance = PDFXStandards.PDFX42007_STANDARD;
-                        registrationMarks = true;
+                        registrationMarks = false;
                         //pdfMarkType = MarkTypes.J_MARK_WITH_CIRCLE;
                         optimizePDF = false;
+                        viewPDF = false;
                     };
                 }; 
                 doc.exportFile( ExportFormat.PDF_TYPE, file, false );
@@ -37,6 +41,6 @@
             l_page = i; 
         }; 
     alert("Exportadas "+ pages.length + " páginas com sucesso");
+    //confirm("Gostaria de ver o último arquivo exportado?") && app.pdfExportPreferences.viewPDF = true;
     };
 #targetengine 'myPersistentScope'
- 
